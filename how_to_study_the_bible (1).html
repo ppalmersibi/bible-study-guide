@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Study the Bible</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F3EC;
+    --parchment: #EDE6D6;
+    --warm-brown: #7A5C3A;
+    --deep-brown: #3E2C1A;
+    --gold: #C89A4A;
+    --gold-light: #E8C97A;
+    --red-accent: #8B2E2E;
+    --ink: #1E1410;
+    --muted: #7A6A58;
+    --border: #C8B89A;
+    --olive: #5A6B3A;
+  }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background-color: var(--cream);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--deep-brown);
+    padding: 3.5rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(200,154,74,0.04) 40px,
+      rgba(200,154,74,0.04) 41px
+    );
+  }
+  .header-ornament {
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 6px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .header h1 em {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+  .header-sub {
+    color: var(--border);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0.75rem;
+  }
+  .header-rule {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.25rem auto 0;
+  }
+
+  /* NAV */
+  .nav {
+    background: var(--parchment);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.9rem 1.1rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-btn:hover { color: var(--warm-brown); }
+  .nav-btn.active { color: var(--deep-brown); border-bottom-color: var(--gold); }
+
+  /* SECTIONS */
+  .section { display: none; padding: 2rem 1.5rem 3rem; max-width: 820px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    color: var(--deep-brown);
+    margin-bottom: 0.35rem;
+  }
+  .section-title span { color: var(--gold); }
+  .section-intro {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* CARDS */
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--deep-brown);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .card-num {
+    background: var(--deep-brown);
+    color: var(--gold-light);
+    font-size: 11px;
+    font-weight: 600;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+  .card p { font-size: 14px; color: #3A3028; line-height: 1.65; }
+
+  /* Q LABELS */
+  .q-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+  }
+  .q-box {
+    background: var(--parchment);
+    border-left: 3px solid var(--gold);
+    padding: 0.9rem 1rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .q-box strong {
+    display: block;
+    font-size: 16px;
+    color: var(--deep-brown);
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .q-box span { font-size: 12px; color: var(--muted); }
+
+  /* MARKS TABLE */
+  .marks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+  .mark-item {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .mark-symbol {
+    font-size: 1.3rem;
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 26px;
+    text-align: center;
+  }
+  .mark-desc strong { display: block; font-size: 13px; font-weight: 600; color: var(--deep-brown); }
+  .mark-desc span { font-size: 12px; color: var(--muted); }
+
+  /* CALLOUT */
+  .callout {
+    border-left: 3px solid var(--red-accent);
+    background: #F9F1F1;
+    padding: 1rem 1.25rem;
+    border-radius: 0 4px 4px 0;
+    margin: 1.25rem 0;
+    font-size: 14px;
+    color: var(--deep-brown);
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .callout-olive {
+    border-left-color: var(--olive);
+    background: #F3F5EE;
+    color: #2E3C1A;
+    font-style: normal;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  /* STEP FLOW */
+  .step-flow { counter-reset: steps; }
+  .step-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    align-items: flex-start;
+  }
+  .step-num {
+    background: var(--gold);
+    color: var(--deep-brown);
+    font-weight: 700;
+    font-size: 13px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-family: 'Playfair Display', serif;
+  }
+  .step-body strong { display: block; font-size: 14px; font-weight: 600; color: var(--deep-brown); margin-bottom: 3px; }
+  .step-body p { font-size: 13px; color: #4A3C2E; }
+
+  /* TAG PILL */
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: var(--parchment);
+    color: var(--warm-brown);
+    border: 1px solid var(--border);
+    padding: 2px 10px;
+    border-radius: 99px;
+    margin: 3px 3px 0 0;
+  }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 560px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* CHART-LIKE */
+  .genre-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+    font-size: 13px;
+  }
+  .genre-label { min-width: 110px; color: var(--deep-brown); font-weight: 600; }
+  .genre-bar-wrap { flex: 1; background: var(--parchment); border-radius: 2px; height: 8px; }
+  .genre-bar { height: 8px; border-radius: 2px; background: var(--gold); }
+  .genre-tip { min-width: 130px; color: var(--muted); font-size: 12px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
+    background: var(--parchment);
+  }
+  footer em { color: var(--warm-brown); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-ornament">✦ ✦ ✦</span>
+  <h1>How to <em>Study</em> the Bible</h1>
+  <p class="header-sub">A Reference Guide to Inductive Bible Study</p>
+  <div class="header-rule"></div>
+</div>
+
+<nav class="nav" role="navigation" aria-label="Sections">
+  <button class="nav-btn active" onclick="show('overview', this)">Overview</button>
+  <button class="nav-btn" onclick="show('observation', this)">Observation</button>
+  <button class="nav-btn" onclick="show('interpretation', this)">Interpretation</button>
+  <button class="nav-btn" onclick="show('application', this)">Application</button>
+  <button class="nav-btn" onclick="show('marking', this)">Marking</button>
+  <button class="nav-btn" onclick="show('genres', this)">Genres</button>
+  <button class="nav-btn" onclick="show('tools', this)">Tools</button>
+</nav>
+
+<!-- OVERVIEW -->
+<section id="overview" class="section active">
+  <h2 class="section-title">The <span>Inductive</span> Method</h2>
+  <p class="section-intro">The <strong>Inductive Bible Study</strong> method lets the text speak for itself rather than reading into it. The method moves in three stages that build on each other.</p>
+
+  <div class="callout">
+    "The Bible is God's love letter to you. It is life itself. Handle it with care — and with diligence."
+    <div style="font-family:'Source Sans 3',sans-serif;font-style:normal;font-size:12px;color:var(--muted);margin-top:6px;"></div>
+  </div>
+
+  <div style="margin: 1.5rem 0;">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>Observation — What does it say?</strong>
+        <p>Read the text carefully and repeatedly. Ask the 5 W's and an H. Note every detail without yet drawing conclusions.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>Interpretation — What does it mean?</strong>
+        <p>Let scripture interpret scripture. Study context, grammar, and genre. Ask what the author intended for the original audience.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>Application — What does it mean for me?</strong>
+        <p>Only after understanding the meaning: identify principles and apply them specifically to your life today.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-olive">
+    <strong>Key principle:</strong> Application without proper observation and interpretation leads to misuse of scripture. The sequence is not optional — meaning must be established before application is valid.
+  </div>
+
+  <div class="card" style="margin-top:1.5rem;">
+    <div class="card-title">Why "Inductive"?</div>
+    <p>Inductive reasoning moves from specific observations to general conclusions — the opposite of deductive. You study what the text actually says, then draw conclusions from it. This guards against reading your assumptions into scripture (called <em>eisegesis</em>) and instead draws meaning out of it (<em>exegesis</em>).</p>
+  </div>
+</section>
+
+<!-- OBSERVATION -->
+<section id="observation" class="section">
+  <h2 class="section-title"><span>Observation</span></h2>
+  <p class="section-intro">The foundation of good Bible study. Read the passage slowly, repeatedly — at least three times. The goal is to see everything the author wrote, nothing more, nothing less.</p>
+
+  <h3 style="font-family:'Playfair Display',serif;color:var(--deep-brown);margin-bottom:1rem;font-size:1.1rem;">Ask the 5 W's + H</h3>
+  <div class="q-grid">
+    <div class="q-box"><strong>Who?</strong><span>Who is speaking? Who are the people involved? Who is the audience?</span></div>
+    <div class="q-box"><strong>What?</strong><span>What is happening? What are the key events, ideas, or commands?</span></div>
+    <div class="q-box"><strong>When?</strong><span>When does this take place? Are there time references or sequences?</span></div>
+    <div class="q-box"><strong>Where?</strong><span>Where is this happening? What geographical context matters?</span></div>
+    <div class="q-box"><strong>Why?</strong><span>Why is this being said or done? Are reasons or purposes stated?</span></div>
+    <div class="q-box"><strong>How?</strong><span>How is something done or accomplished? What method or means?</span></div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;color:var(--deep-brown);margin:1.5rem 0 0.75rem;font-size:1.1rem;">Things to look for in the text</h3>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"><div class="card-num">→</div> Key words</div>
+      <p>Words that are repeated, emphasized, or essential to understanding the passage. Mark them consistently throughout (see Marking tab).</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-num">→</div> Lists</div>
+      <p>When an author lists things — qualities, commands, reasons — number them. Lists often reveal the structure of an argument.</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-num">→</div> Contrasts & comparisons</div>
+      <p>Look for "but," "however," "likewise," "just as." These signal comparison (A is like B) or contrast (A but not B).</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-num">→</div> Terms of conclusion</div>
+      <p>Words like "therefore," "so," "for this reason" signal that what follows is grounded in what came before. Always ask what the "therefore" is there for.</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-num">→</div> Expressions of time</div>
+      <p>"After this," "in those days," "until." Time markers reveal sequence and causation.</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-num">→</div> Terms of purpose</div>
+      <p>"In order that," "so that," "lest" — these reveal the why behind an action or command.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:1.5rem;">
+    "Don't rush observation. Most poor Bible interpretation comes not from wrong thinking — but from too little looking."
+  </div>
+</section>
+
+<!-- INTERPRETATION -->
+<section id="interpretation" class="section">
+  <h2 class="section-title"><span>Interpretation</span></h2>
+  <p class="section-intro">After thorough observation, ask: what did this mean to the original author and audience? The primary meaning is singular and historical — a passage cannot mean something today that it didn't mean when written.</p>
+
+  <div class="step-flow">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>Let scripture interpret scripture</strong>
+        <p>The best commentary on the Bible is the Bible itself. When a passage is unclear, find other places where the same truth is addressed more plainly. Never build a doctrine on a single obscure verse.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>Consider the context — near and far</strong>
+        <p>Immediate context: the verses immediately before and after. Chapter context: the argument of the whole chapter. Book context: the author's purpose in writing. Historical context: what was happening in the world at the time?</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>Understand the genre</strong>
+        <p>Poetry uses metaphor and hyperbole. Prophecy includes symbolic language. Epistles make logical arguments. History records events. Each genre requires appropriate reading (see Genres tab).</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <strong>Study key word meanings</strong>
+        <p>Use a concordance to find the original Hebrew or Greek word. Many English words translate multiple originals — knowing the difference often unlocks the meaning. A Bible dictionary or Strong's Concordance helps here.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <strong>Identify the main theme of the passage</strong>
+        <p>After your study, write a one-sentence summary of what the passage is about. This becomes your "segment title" and helps you remember the flow of a book.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-olive">
+    <strong>Context rule of thumb:</strong> Read at minimum the entire chapter — preferably the entire book — before drawing conclusions about a single verse. A text without a context is a pretext.
+  </div>
+</section>
+
+<!-- APPLICATION -->
+<section id="application" class="section">
+  <h2 class="section-title"><span>Application</span></h2>
+  <p class="section-intro">The final — and most personal — step. Application is not merely intellectual agreement. It demands a response: a change in thinking, attitude, or action. Knowledge of scripture that doesn't change life is dangerous (James 1:22).</p>
+
+  <div class="card">
+    <div class="card-title">The application bridge</div>
+    <p>Application moves from timeless principle → specific action. First identify the principle the passage teaches (valid for all people, all times). Then ask how that principle specifically applies to your situation today.</p>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;color:var(--deep-brown);margin:1.5rem 0 0.75rem;font-size:1.1rem;">Application questions to ask yourself</h3>
+
+  <div class="step-flow">
+    <div class="step-item">
+      <div class="step-num">→</div>
+      <div class="step-body">
+        <strong>Is there a sin to avoid or confess?</strong>
+        <p>Does this passage reveal something in my life that is contrary to God's will?</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">→</div>
+      <div class="step-body">
+        <strong>Is there a promise to claim?</strong>
+        <p>Is there a conditional or unconditional promise here? What are the conditions, if any?</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">→</div>
+      <div class="step-body">
+        <strong>Is there a command to obey?</strong>
+        <p>Is there a clear directive for believers? Is this addressed to me specifically?</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">→</div>
+      <div class="step-body">
+        <strong>Is there an example to follow or avoid?</strong>
+        <p>Do the characters in the passage model something worth imitating — or warning against?</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">→</div>
+      <div class="step-body">
+        <strong>Is there a truth about God to believe?</strong>
+        <p>What does this passage reveal about God's character, ways, or purposes?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    "The greatest Bible scholar is not the one who knows the most — but the one who obeys the most."
+  </div>
+</section>
+
+<!-- MARKING -->
+<section id="marking" class="section">
+  <h2 class="section-title">Marking <span>Your Bible</span></h2>
+  <p class="section-intro">A system of marking key words and themes with consistent symbols and colors transforms reading into active study and reveals patterns across a book. Use colored pencils, not highlighters (which bleed).</p>
+
+  <div class="callout callout-olive" style="margin-bottom:1.5rem;">
+    <strong>How to do it:</strong> Choose a key word, decide on a symbol and/or color, and mark it the same way every time it appears — even across different books of the Bible. Consistency is the whole point.
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;color:var(--deep-brown);margin-bottom:0.75rem;font-size:1.1rem;">Common marking symbols</h3>
+  <div class="marks-grid">
+    <div class="mark-item"><div class="mark-symbol">✝</div><div class="mark-desc"><strong>God / Father</strong><span>Often yellow or outlined in gold</span></div></div>
+    <div class="mark-item"><div class="mark-symbol">🕊</div><div class="mark-desc"><strong>Holy Spirit</strong><span>Often blue with a bird-like symbol</span></div></div>
+    <div class="mark-item"><div class="mark-symbol">☐</div><div class="mark-desc"><strong>Sin / Evil</strong><span>Often black or dark outline</span></div></div>
+    <div class="mark-item"><div class="mark-symbol">♡</div><div class="mark-desc"><strong>Love</strong><span>Red heart outline</span></div></div>
+    <div class="mark-item"><div class="mark-symbol">→</div><div class="mark-desc"><strong>Therefore / So</strong><span>Arrow to signal conclusion</span></div></div>
+    <div class="mark-item"><div class="mark-symbol">⏰</div><div class="mark-desc"><strong>Time references</strong><span>Clock or circle (orange)</span></div></div>
+    <div class="mark-item"><div class="mark-symbol">📍</div><div class="mark-desc"><strong>Places / Geography</strong><span>Box it and look it up on a map</span></div></div>
+    <div class="mark-item"><div class="mark-symbol">⚑</div><div class="mark-desc"><strong>Key verse / Insight</strong><span>Flag or star for insight to remember</span></div></div>
+    <div class="mark-item"><div class="mark-symbol">?</div><div class="mark-desc"><strong>Question / Unclear</strong><span>Mark what you don't yet understand</span></div></div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;color:var(--deep-brown);margin:1.5rem 0 0.75rem;font-size:1.1rem;">Building a chapter theme chart</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:1rem;">After finishing each chapter, write a one-sentence summary of its main theme. These accumulate into a book outline that helps you remember the whole.</p>
+  <div class="card">
+    <div class="card-title">Example — Romans</div>
+    <div style="font-size:13px;color:#4A3C2E;line-height:2;">
+      <div style="display:grid;grid-template-columns:60px 1fr;gap:4px 12px;">
+        <span style="color:var(--gold);font-weight:700;">Ch. 1</span><span>Universal sinfulness of humanity — Gentiles under condemnation</span>
+        <span style="color:var(--gold);font-weight:700;">Ch. 2</span><span>Jews also under judgment — the law doesn't save</span>
+        <span style="color:var(--gold);font-weight:700;">Ch. 3</span><span>Righteousness from God through faith in Christ</span>
+        <span style="color:var(--gold);font-weight:700;">Ch. 4</span><span>Abraham justified by faith, not works — the pattern</span>
+        <span style="color:var(--gold);font-weight:700;">Ch. 5</span><span>Peace with God, and Adam vs. Christ — the two heads</span>
+        <span style="color:var(--muted);font-style:italic;">…and so on through ch. 16</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GENRES -->
+<section id="genres" class="section">
+  <h2 class="section-title">Reading by <span>Genre</span></h2>
+  <p class="section-intro">The Bible contains many types of literature, each with its own rules of reading. Ignoring genre is one of the most common sources of misinterpretation.</p>
+
+  <div style="margin-bottom:1.5rem;">
+    <div class="genre-row"><span class="genre-label">Narrative</span><div class="genre-bar-wrap"><div class="genre-bar" style="width:80%"></div></div><span class="genre-tip">~40% of the OT</span></div>
+    <div class="genre-row"><span class="genre-label">Prophecy</span><div class="genre-bar-wrap"><div class="genre-bar" style="width:60%"></div></div><span class="genre-tip">Major &amp; minor prophets</span></div>
+    <div class="genre-row"><span class="genre-label">Poetry / Wisdom</span><div class="genre-bar-wrap"><div class="genre-bar" style="width:45%"></div></div><span class="genre-tip">Psalms, Proverbs, Job</span></div>
+    <div class="genre-row"><span class="genre-label">Epistles</span><div class="genre-bar-wrap"><div class="genre-bar" style="width:55%"></div></div><span class="genre-tip">NT letters to churches</span></div>
+    <div class="genre-row"><span class="genre-label">Apocalyptic</span><div class="genre-bar-wrap"><div class="genre-bar" style="width:25%"></div></div><span class="genre-tip">Daniel, Revelation</span></div>
+    <div class="genre-row"><span class="genre-label">Gospel / Biography</span><div class="genre-bar-wrap"><div class="genre-bar" style="width:35%"></div></div><span class="genre-tip">Matthew, Mark, Luke, John</span></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Narrative (History)</div>
+      <p>Not every story is prescriptive — descriptive text records what happened, not necessarily what should happen. Characters' choices are not automatically models to follow. Ask: what does the author want the reader to learn from this account?</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Poetry & Wisdom</div>
+      <p>Hebrew poetry uses parallelism, not rhyme. Proverbs are general wisdom principles, not absolute promises. Psalms express emotion and theology through imagery — not every metaphor is literal. Don't over-literalize poetic language.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Epistles (Letters)</div>
+      <p>NT letters follow a logical argument — read the whole letter to understand any part. Identify the occasion (why was it written?) and the audience. Commands addressed to first-century churches require discernment about universal vs. culturally specific application.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Prophecy</div>
+      <p>Distinguish between predictive and forth-telling prophecy. Some prophecy has already been fulfilled; some is future. OT prophecy often has a near fulfillment (for Israel) and a far fulfillment (messianic/eschatological). Don't flatten the two.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Apocalyptic</div>
+      <p>Revelation and Daniel use rich symbolic language — numbers, beasts, colors — that had recognizable meaning to original audiences. Understand the symbols in their historical context before assigning contemporary meaning. Humility is essential.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Law (Torah)</div>
+      <p>Three categories: moral (universally binding — the Ten Commandments), ceremonial (fulfilled in Christ), and civil (specific to Israel's theocracy). Understanding which category a law falls into is essential before applying it today.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools" class="section">
+  <h2 class="section-title">Tools &amp; <span>Habits</span></h2>
+  <p class="section-intro">The goal is to study the text itself — reference tools support but never replace careful reading of the Bible.</p>
+
+  <h3 style="font-family:'Playfair Display',serif;color:var(--deep-brown);margin-bottom:0.75rem;font-size:1.1rem;">Essential reference tools</h3>
+  <div class="two-col" style="margin-bottom:1.5rem;">
+    <div class="card">
+      <div class="card-title"><div class="card-num">1</div> A good study Bible</div>
+      <p>Choose one with cross-references, book introductions, and maps. The <em>New Inductive Study Bible</em> is designed specifically for this method, with wide margins for notes.</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-num">2</div> Concordance</div>
+      <p>A complete concordance (e.g. Strong's) lets you find every occurrence of a word and look up the original Hebrew or Greek. Essential for key word study.</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-num">3</div> Bible dictionary</div>
+      <p>Provides historical, cultural, and geographical background. Helpful for understanding unfamiliar people, places, and customs.</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="card-num">4</div> Bible atlas</div>
+      <p>Geography profoundly shapes meaning in scripture. Knowing where events happened — terrain, proximity, significance — adds depth to observation.</p>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;color:var(--deep-brown);margin-bottom:0.75rem;font-size:1.1rem;">Recommended study habits</h3>
+  <div class="card">
+    <div style="display:flex;flex-direction:column;gap:0.85rem;">
+      <div><span class="pill">Daily</span><span class="pill">Consistent</span> Study at the same time each day — it builds habit and signals to yourself that this is priority.</div>
+      <div><span class="pill">Pray first</span> Ask for understanding before you open the text. Acknowledge dependence on the Holy Spirit as the author of scripture.</div>
+      <div><span class="pill">Write it down</span> Keep a study notebook. Writing forces clarity of thought. Note observations, questions, and what you're learning.</div>
+      <div><span class="pill">Read the whole book first</span> Before studying verse by verse, read the entire book in one sitting to grasp the author's overall flow and purpose.</div>
+      <div><span class="pill">Memorize key verses</span> Scripture memory makes the word available in your mind without the book. Even a few verses per month accumulates significantly over years.</div>
+      <div><span class="pill">Study with others</span> Small group inductive study is strongly encouraged — others see what you miss, and accountability deepens application.</div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:1.5rem;">
+    "Handle accurately the word of truth." — 2 Timothy 2:15. The goal of all Bible study is not information, but transformation.
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;color:var(--deep-brown);margin:1.5rem 0 0.75rem;font-size:1.1rem;">Precept upon Precept — the structured approach</h3>
+  <div class="card">
+    <p>The <em>Precept Upon Precept</em> curriculum applies this method book by book. Each lesson involves: reading assignments, marking exercises, observation worksheets, and group discussion. The method is the same whether you're using a formal curriculum or studying independently — the structure just guides you through it systematically.</p>
+  </div>
+</section>
+
+<footer>
+  For personal reference use · Source: <em>How to Study Your Bible</em> by Kay Arthur (Harvest House Publishers)
+</footer>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+<div style="text-align:center;padding:1.25rem;font-size:13px;background:var(--parchment);border-top:1px solid var(--border);">
+  <a href="index.html" style="color:var(--warm-brown);text-decoration:none;">← Back to all guides</a>
+  &nbsp;·&nbsp;
+  <a href="biblical_interpretation_speer.html" style="color:var(--warm-brown);text-decoration:none;">Also see: Biblical Interpretation →</a>
+</div>
+</body>
+</html>
