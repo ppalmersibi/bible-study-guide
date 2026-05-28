@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Study Reference Guides</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --page-bg: #12120F;
+  --text-primary: #EDE9E0;
+  --text-muted: #8A8475;
+  --border: rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--page-bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 5rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(ellipse, rgba(180,155,90,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #B49B5A;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.eyebrow::before, .eyebrow::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: rgba(180,155,90,0.4);
+  display: block;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+.hero h1 em {
+  font-style: italic;
+  color: #C8AA6A;
+}
+.hero-sub {
+  max-width: 500px;
+  margin: 0 auto;
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.hero-divider {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(180,155,90,0.5), transparent);
+  margin: 3rem auto 0;
+}
+
+/* GUIDE CARDS SECTION */
+.guides {
+  padding: 2rem 1.5rem 5rem;
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 640px) {
+  .guides { grid-template-columns: 1fr; }
+}
+
+/* CARD BASE */
+.guide-card {
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+}
+.guide-card:hover {
+  transform: translateY(-4px);
+}
+
+/* CARD 1 — Warm parchment/brown (How to Study) */
+.card-warm {
+  background: #2A1F10;
+  border: 1px solid rgba(200,160,70,0.2);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+.card-warm:hover {
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,160,70,0.3);
+}
+.card-warm .card-header {
+  background: linear-gradient(135deg, #3E2C14 0%, #2A1F10 100%);
+  padding: 2rem 1.75rem 1.5rem;
+  border-bottom: 1px solid rgba(200,160,70,0.15);
+  position: relative;
+  overflow: hidden;
+}
+.card-warm .card-header::after {
+  content: '✦';
+  position: absolute;
+  right: 1.5rem; top: 1.5rem;
+  font-size: 1.5rem;
+  color: rgba(200,160,70,0.2);
+}
+.card-warm .tag {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #C8A046;
+  background: rgba(200,160,70,0.1);
+  border: 1px solid rgba(200,160,70,0.25);
+  padding: 3px 10px;
+  border-radius: 99px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.card-warm .card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #F0E8D5;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.card-warm .card-sub {
+  font-size: 13px;
+  color: #9A8060;
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
+.card-warm .card-body {
+  padding: 1.5rem 1.75rem;
+}
+.card-warm .card-desc {
+  font-size: 13px;
+  color: #9A8468;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+.card-warm .topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 1.5rem;
+}
+.card-warm .topic-pill {
+  font-size: 11px;
+  background: rgba(200,160,70,0.08);
+  border: 1px solid rgba(200,160,70,0.2);
+  color: #C8A046;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+.card-warm .cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #C8A046;
+  letter-spacing: 0.04em;
+}
+.card-warm .cta-arrow {
+  width: 28px; height: 28px;
+  border: 1px solid rgba(200,160,70,0.35);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.card-warm:hover .cta-arrow {
+  background: rgba(200,160,70,0.15);
+  border-color: rgba(200,160,70,0.6);
+}
+
+/* CARD 2 — Cool slate/navy (Hermeneutics) */
+.card-cool {
+  background: #111827;
+  border: 1px solid rgba(100,140,200,0.2);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+.card-cool:hover {
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(100,140,200,0.3);
+}
+.card-cool .card-header {
+  background: linear-gradient(135deg, #1A2640 0%, #111827 100%);
+  padding: 2rem 1.75rem 1.5rem;
+  border-bottom: 1px solid rgba(100,140,200,0.12);
+  position: relative;
+  overflow: hidden;
+}
+.card-cool .card-header::after {
+  content: '◈';
+  position: absolute;
+  right: 1.5rem; top: 1.5rem;
+  font-size: 1.5rem;
+  color: rgba(100,140,200,0.18);
+}
+.card-cool .tag {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7BA3D4;
+  background: rgba(100,140,200,0.1);
+  border: 1px solid rgba(100,140,200,0.22);
+  padding: 3px 10px;
+  border-radius: 99px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.card-cool .card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #D8E4F5;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.card-cool .card-sub {
+  font-size: 13px;
+  color: #5A7090;
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
+.card-cool .card-body {
+  padding: 1.5rem 1.75rem;
+}
+.card-cool .card-desc {
+  font-size: 13px;
+  color: #6A7E96;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+.card-cool .topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 1.5rem;
+}
+.card-cool .topic-pill {
+  font-size: 11px;
+  background: rgba(100,140,200,0.08);
+  border: 1px solid rgba(100,140,200,0.18);
+  color: #7BA3D4;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+.card-cool .cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #7BA3D4;
+  letter-spacing: 0.04em;
+}
+.card-cool .cta-arrow {
+  width: 28px; height: 28px;
+  border: 1px solid rgba(100,140,200,0.3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.card-cool:hover .cta-arrow {
+  background: rgba(100,140,200,0.12);
+  border-color: rgba(100,140,200,0.55);
+}
+
+/* COMPARISON SECTION */
+.comparison {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem 5rem;
+}
+.comparison-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .comparison-grid { grid-template-columns: 1fr; }
+  .divider-col { display: none; }
+}
+.comp-col {
+  padding: 1.75rem;
+}
+.divider-col {
+  background: var(--border);
+  width: 1px;
+}
+.comp-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.comp-left .comp-label { color: #C8A046; }
+.comp-right .comp-label { color: #7BA3D4; }
+.comp-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 0.75rem;
+  font-size: 13px;
+  color: #8A8475;
+  line-height: 1.5;
+  align-items: flex-start;
+}
+.comp-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+.comp-left .comp-dot { background: rgba(200,160,70,0.5); }
+.comp-right .comp-dot { background: rgba(100,140,200,0.5); }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 12px;
+  color: #3A3530;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+footer em { color: #5A5248; }
+
+/* FADE IN */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero        { animation: fadeUp 0.6s ease both; }
+.guides      { animation: fadeUp 0.6s ease 0.15s both; }
+.comparison  { animation: fadeUp 0.6s ease 0.25s both; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="eyebrow">Reference Library</p>
+  <h1>Studying <em>Scripture</em><br>With Care</h1>
+  <p class="hero-sub">Two complementary guides — one practical, one philosophical — for anyone who wants to read the Bible seriously and well.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="guides">
+
+  <!-- GUIDE 1: How to Study the Bible -->
+  <a href="how_to_study_the_bible.html" class="guide-card card-warm">
+    <div class="card-header">
+      <span class="tag">Practical Method</span>
+      <div class="card-title">How to Study the Bible</div>
+      <div class="card-sub">The Inductive Method</div>
+    </div>
+    <div class="card-body">
+      <p class="card-desc">A hands-on system for observing, interpreting, and applying scripture — built around repeated, careful reading of the text itself before consulting any outside source.</p>
+      <div class="topics">
+        <span class="topic-pill">Observation</span>
+        <span class="topic-pill">Interpretation</span>
+        <span class="topic-pill">Application</span>
+        <span class="topic-pill">Marking</span>
+        <span class="topic-pill">Genres</span>
+        <span class="topic-pill">Tools</span>
+      </div>
+      <div class="cta">
+        Open guide
+        <span class="cta-arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- GUIDE 2: Biblical Interpretation -->
+  <a href="biblical_interpretation_speer.html" class="guide-card card-cool">
+    <div class="card-header">
+      <span class="tag">Sacred Hermeneutics</span>
+      <div class="card-title">Biblical Interpretation</div>
+      <div class="card-sub">The Philosophy Behind the Method</div>
+    </div>
+    <div class="card-body">
+      <p class="card-desc">A theological foundation for why objective interpretation is possible, what assumptions must be in place, and how to handle contested questions — binding commands, silence, and doctrinal differences.</p>
+      <div class="topics">
+        <span class="topic-pill">Assumptions</span>
+        <span class="topic-pill">Successive Readings</span>
+        <span class="topic-pill">Rules</span>
+        <span class="topic-pill">Commands</span>
+        <span class="topic-pill">Silence</span>
+        <span class="topic-pill">Differences</span>
+      </div>
+      <div class="cta">
+        Open guide
+        <span class="cta-arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+</div>
+
+<!-- COMPARISON -->
+<div class="comparison">
+  <p class="comparison-heading">How the two guides relate</p>
+  <div class="comparison-grid">
+    <div class="comp-col comp-left">
+      <div class="comp-label">How to Study the Bible</div>
+      <div class="comp-item"><span class="comp-dot"></span><span>Focuses on what to do step by step</span></div>
+      <div class="comp-item"><span class="comp-dot"></span><span>Teaches a marking and note-taking system</span></div>
+      <div class="comp-item"><span class="comp-dot"></span><span>Addresses literary genres and how to read each</span></div>
+      <div class="comp-item"><span class="comp-dot"></span><span>Best starting point for building a study habit</span></div>
+      <div class="comp-item"><span class="comp-dot"></span><span>Immediate and actionable</span></div>
+    </div>
+    <div class="divider-col"></div>
+    <div class="comp-col comp-right">
+      <div class="comp-label">Biblical Interpretation</div>
+      <div class="comp-item"><span class="comp-dot"></span><span>Focuses on why the method works the way it does</span></div>
+      <div class="comp-item"><span class="comp-dot"></span><span>Addresses binding commands, examples, and silence</span></div>
+      <div class="comp-item"><span class="comp-dot"></span><span>Engages philosophical challenges to scripture's clarity</span></div>
+      <div class="comp-item"><span class="comp-dot"></span><span>Best for navigating doctrinal disagreements</span></div>
+      <div class="comp-item"><span class="comp-dot"></span><span>Deeper and more theological</span></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Sources: <em>How to Study Your Bible</em> — Kay Arthur (Harvest House Publishers) &nbsp;·&nbsp; <em>Biblical Interpretation</em> — Charles Speer (Sunset Institute Press, 2006)
+</footer>
+
+</body>
+</html>
